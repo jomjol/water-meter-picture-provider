@@ -7,6 +7,8 @@ This is an HTTP-Webserver, sending an image of an ArduCAM (OV2640) on request an
 The code is implemented in the Arduino IDE and is directly related to an selfmade water meter for house automation. 
 For the housing etc. see  [https://www.thingiverse.com/thing:3238162](https://www.thingiverse.com/thing:3238162)
 
+An overview about the complete system can be seen here: [https://github.com/jomjol/water-meter-measurement-system](https://github.com/jomjol/water-meter-measurement-system)
+
 ### Commands
 - http://IP-ADRESS/lighton   -   Switching the LED-lights on
 - http://IP-ADRESS/lightoff - Switching the LED-lights off
