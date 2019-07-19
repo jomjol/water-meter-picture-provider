@@ -1,6 +1,17 @@
 # water-meter-house-automation
 ESP8266 software for a water meter measurement based on an ArduCAM, ESP8266 and WS2812-LED illumination
 
+There are two code versions available:
+
+#### Main Version for NodeMCU
+* [ArduCAM_Server-NodeMCU-OTA_GitHub](ArduCAM_Server-NodeMCU-OTA_GitHub)
+* The main code - tested and working with NodeMCU hardware and fitting to the wiring below.
+
+#### ESP32 Version (only compiling tested)
+* [ArduCAM_Server-ESP32-OTA_GitHub](ArduCAM_Server-ESP32-OTA_GitHub)
+* Libraries (WiFi, ... and ArduCam) have been tested to be compilable for "ESP32 Dev Module"'
+* ** No hardware test done!!!**
+
 ## Functionality
 
 This is an HTTP-Webserver, sending an image of an ArduCAM (OV2640) on request and additionally switching on illumination.
