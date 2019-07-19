@@ -10,7 +10,7 @@ There are two code versions available:
 #### ESP32 Version (only compiling tested)
 * [ArduCAM_Server-ESP32-OTA_GitHub](ArduCAM_Server-ESP32-OTA_GitHub)
 * Libraries (WiFi, ... and ArduCam) have been tested to be compilable for "ESP32 Dev Module"'
-* ** No hardware test done!!!**
+* **No hardware test done with ESP32 Board!!!**
 
 ## Functionality
 
