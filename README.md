@@ -9,7 +9,7 @@ There are two code versions available:
 
 #### ESP32-CAM Version
 * [ESP32-CAM_Server-GitHub](ESP32-CAM_Server-GitHub)
-* Flashing onto the board is done using an FTDI-Flasher and the board is addresses as "ESP32-Wrover Module"
+* Flashing onto the board is done using an FTDI-Flasher and the board is addressed as "ESP32-Wrover Module"
 
 ## Functionality
 
