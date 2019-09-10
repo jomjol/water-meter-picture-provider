@@ -29,7 +29,9 @@ An overview about the complete system can be seen here: [https://github.com/jomj
 - http://IP-ADRESS/lighton   -   Switching the LED-lights on
 - http://IP-ADRESS/lightoff - Switching the LED-lights off
 - http://IP-ADRESS/capture_with_light - Turn light on, send JPG, Turn light off
-ESP32-CAM only:
+
+Usefull for ESP32-CAM with onboard flash LED only:
+
 - http://IP-ADRESS/flashon   -   Switching the onboard LED-flash on (GPIO4)
 - http://IP-ADRESS/flashoff - Switching the onboard LED-flash off (GPIO4)
 - http://IP-ADRESS/capture_with_light - Turn internal flash light on, send JPG, Turn flash light off
