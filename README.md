@@ -34,7 +34,7 @@ Usefull for ESP32-CAM with onboard flash LED only:
 
 - http://IP-ADRESS/flashon   -   Switching the onboard LED-flash on (GPIO4)
 - http://IP-ADRESS/flashoff - Switching the onboard LED-flash off (GPIO4)
-- http://IP-ADRESS/capture_with_light - Turn internal flash light on, send JPG, Turn flash light off
+- http://IP-ADRESS/capture_with_flashlight - Turn internal flash light on, send JPG, Turn flash light off
 - to be extended in future versions ...
 
 ### Compling Code
