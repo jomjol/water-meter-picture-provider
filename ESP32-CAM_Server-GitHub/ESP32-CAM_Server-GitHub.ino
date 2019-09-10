@@ -11,14 +11,15 @@ const char* ssid = "SSID";
 const char* password = "Password";
 const char* host = "Kamera";
 
-#define LEDPin      4              // Pin für Steuerung LED-Leiste GPIO4
-#define INT_LED     2         // Interne LED zum Blinken bei WiFi-Connect at pin GPIO16 (D0).
+#define LEDPin      2          // Pin für Steuerung LED-Leiste 
+#define INT_LED     33         // Interne LED zum Blinken bei WiFi-Connect at pin GPIO33 (ESP32-CAM).
+#define FLASH_PIN   4          // Intere Flash-LED des ESP32-CAM Moduls
 
-GitESP32CAMServerLibrary::ESP32CAMServerClass ESP32CAMServer(LEDPin, 10, 50, 16); // Pin, Anzahl LEDs, Brightness, CS
+GitESP32CAMServerLibrary::ESP32CAMServerClass ESP32CAMServer(LEDPin, 10, 50, 16, FLASH_PIN); // Pin, Anzahl LEDs, Brightness, CS, GPIO_FLASH
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("gestartet - setup");
+  Serial.println("gestartet - setup - done");
   WifiReConnect();
   OTA_setup();
 

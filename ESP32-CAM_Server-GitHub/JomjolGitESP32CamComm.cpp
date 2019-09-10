@@ -2,11 +2,15 @@
 
 
 // Constructor
-GitESP32CAMCommLibrary::ESP32CAMCommClass::ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, WebServer *_server)
+GitESP32CAMCommLibrary::ESP32CAMCommClass::ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN, WebServer *_server)
 {
 //  LEDBandComm = new LEDBandCommLibrary::LEDBandCommClass(_pin, _num_led, _brightness);
   light = new Adafruit_NeoPixel(_num_led, _pin, NEO_GRBW + NEO_KHZ800);
   brightness = _brightness;
+  flashPIN = _flashPIN;
+
+  pinMode(flashPIN, OUTPUT);         // Initialize the LED_BUILTIN pin as an output
+
 
   server = _server;
   Serial.println("ArduCAMCommClass - Setup Done");
@@ -108,6 +112,19 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCaptureMITHeader() {
   Serial.println(F("CAM send Done."));
 }
 
+void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCaptureWithFlashLight()
+{
+  FlashOn();
+  Serial.println("Flash an");
+
+  Serial.println("Groesse auf 5 gesetzt ql=5");
+  delay(5000);
+  serverCaptureMITHeader();
+  
+  FlashOff();
+  Serial.println("Flash aus");
+}
+
 void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCaptureWithLigth()
 {
   LightOn();
@@ -183,6 +200,8 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::setup()
 	  //drop down frame size for higher initial frame rate
 //	  s->set_framesize(s, FRAMESIZE_QVGA);
     s->set_framesize(s, FRAMESIZE_SVGA);
+    s->set_quality(s, 10);
+    s->set_lenc(s, true);
 
 	#if defined(CAMERA_MODEL_M5STACK_WIDE)
 	  s->set_vflip(s, 1);
@@ -197,6 +216,17 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::setup()
 
 }
 
+void GitESP32CAMCommLibrary::ESP32CAMCommClass::FlashOn()
+{
+  Serial.println("FlashOn");
+  digitalWrite(flashPIN, HIGH);      // turn the LED on.
+}
+
+void GitESP32CAMCommLibrary::ESP32CAMCommClass::FlashOff()
+{
+  Serial.println("FlashOff");
+  digitalWrite(flashPIN, LOW);      // turn the LED on.
+}
 
 void GitESP32CAMCommLibrary::ESP32CAMCommClass::LightOn()
 {

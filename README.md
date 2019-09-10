@@ -1,6 +1,12 @@
 # water-meter-house-automation
 Software for a water meter measurement to provide an JPG-Image of a watermeter with an OV2640 camera and a WS2812-LED illumination
 
+## Version
+##### 1.0.0 Initial Version for ESP8266 (with ArduCAM) and ESP32-CAM (with OV2640)
+##### 2.0.0 Usage of internal ESP32-CAM Flash LED
+* Attention @ ESP32-CAM: compared to v1.0.0 the connection to the LED-strip has been changed from GPIO4 to GPIO2 
+
+
 There are two code versions available:
 
 #### Main Version for NodeMCU
@@ -23,6 +29,10 @@ An overview about the complete system can be seen here: [https://github.com/jomj
 - http://IP-ADRESS/lighton   -   Switching the LED-lights on
 - http://IP-ADRESS/lightoff - Switching the LED-lights off
 - http://IP-ADRESS/capture_with_light - Turn light on, send JPG, Turn light off
+ESP32-CAM only:
+- http://IP-ADRESS/flashon   -   Switching the onboard LED-flash on (GPIO4)
+- http://IP-ADRESS/flashoff - Switching the onboard LED-flash off (GPIO4)
+- http://IP-ADRESS/capture_with_light - Turn internal flash light on, send JPG, Turn flash light off
 - to be extended in future versions ...
 
 ### Compling Code
@@ -65,5 +75,8 @@ The code is implemented in C++, using different classes.
 - Capacity 1000uF
 - Resistor 470 Ohm
 
-### Wiring
-<img src="./images/ESP32-CAM_Wiring.png" width="800">
+### Wiring including LED-Strip
+<img src="./images/ESP32-CAM_Wiring_neu.png" width="800">
+
+### Wiring for usage internal ESP32-CAM flash LED only
+<img src="./images/ESP32-CAM_Wiring_Flash_only.png" width="300">

@@ -19,6 +19,12 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithLigth()
   serverCaptureWithLigth();
 }
 
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithFlashLight()
+{
+  Serial.println("ArduCAM-Server-Class - doCaptureWithLigth");
+  serverCaptureWithFlashLight();
+}
+
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
 {
   Serial.println("ArduCAM-Server-Class - doCapture");
@@ -42,6 +48,19 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOff()
   send(200, "text/plain", "Light Off");
 }
 
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::doFlashOn()
+{
+  Serial.println("GPIO4-High");
+  FlashOn();
+  send(200, "text/plain", "Light On");
+}
+
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::doFlashOff()
+{
+  Serial.println("GPIO4-Low");
+  FlashOff();
+  send(200, "text/plain", "Light On");
+}
 
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::setup()
@@ -50,8 +69,11 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::setup()
   
   on("/capture", std::bind(&ESP32CAMServerClass::doCapture, this));
   on("/capture_with_light", std::bind(&ESP32CAMServerClass::doCaptureWithLigth, this));
+  on("/capture_with_flashlight", std::bind(&ESP32CAMServerClass::doCaptureWithFlashLight, this));
   on("/lighton", std::bind(&ESP32CAMServerClass::doLightOn, this));
   on("/lightoff", std::bind(&ESP32CAMServerClass::doLightOff, this));
+  on("/flashon", std::bind(&ESP32CAMServerClass::doFlashOn, this));
+  on("/flashoff", std::bind(&ESP32CAMServerClass::doFlashOff, this));
   
   GitServerLibrary::ServerClass::setup();
 }

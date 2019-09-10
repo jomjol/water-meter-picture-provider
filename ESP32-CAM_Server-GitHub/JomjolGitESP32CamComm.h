@@ -40,17 +40,23 @@ namespace GitESP32CAMCommLibrary
       int brightness;
       void colorWipe(uint32_t c, uint8_t wait);
 
+      int flashPIN;
+
 	  
 
     public:
-      ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, WebServer *_server);
+      ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN, WebServer *_server);
       virtual void setup();
       
       void serverCaptureWithLigth();
+      void serverCaptureWithFlashLight();
       void serverCapture();
 	  
       void LightOn();
       void LightOff();
+
+      void FlashOn();
+      void FlashOff();
       
   };
 }
