@@ -117,9 +117,9 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCaptureWithFlashLight()
   FlashOn();
   Serial.println("Flash an");
 
-  Serial.println("Groesse auf 5 gesetzt ql=5");
   delay(5000);
-  serverCaptureMITHeader();
+  serverCapture();
+//  serverCaptureMITHeader();
   
   FlashOff();
   Serial.println("Flash aus");
@@ -130,16 +130,30 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCaptureWithLigth()
   LightOn();
   Serial.println("Licht an");
 
-  Serial.println("Groesse auf 5 gesetzt ql=5");
   delay(5000);
-  serverCaptureMITHeader();
+  serverCapture();
+//  serverCaptureMITHeader();
   
   LightOff();
   Serial.println("Licht aus");
 }
 
-void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCapture()
+void GitESP32CAMCommLibrary::ESP32CAMCommClass::serverCapture(uint8_t _quality, framesize_t _size)
 {
+  sensor_t * s = esp_camera_sensor_get();
+  if (fr_quality != _quality)
+  {
+    fr_quality = _quality;
+    s->set_quality(s, fr_quality);    
+  }
+
+  if (fr_size != _size)
+  {
+    fr_size = _size;
+    s->set_framesize(s, fr_size);  
+  }
+
+  
   serverCaptureMITHeader();
 }
 
@@ -199,9 +213,11 @@ void GitESP32CAMCommLibrary::ESP32CAMCommClass::setup()
 	  }
 	  //drop down frame size for higher initial frame rate
 //	  s->set_framesize(s, FRAMESIZE_QVGA);
-    s->set_framesize(s, FRAMESIZE_SVGA);
-    s->set_quality(s, 10);
-    s->set_lenc(s, true);
+    fr_size = FRAMESIZE_SVGA;
+    s->set_framesize(s, fr_size);
+    fr_quality = 10;
+    s->set_quality(s, fr_quality);
+    s->set_lenc(s, 1);
 
 	#if defined(CAMERA_MODEL_M5STACK_WIDE)
 	  s->set_vflip(s, 1);

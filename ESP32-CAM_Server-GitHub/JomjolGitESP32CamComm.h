@@ -31,6 +31,7 @@ namespace GitESP32CAMCommLibrary
       WebServer *server;
 //      ArduCAM *myCAM;
 
+
       void serverCaptureMITHeader();
       void camCaptureMITHeader();
       static size_t jpg_encode_stream(void * arg, size_t index, const void* data, size_t len);
@@ -41,6 +42,9 @@ namespace GitESP32CAMCommLibrary
       void colorWipe(uint32_t c, uint8_t wait);
 
       int flashPIN;
+      framesize_t fr_size;
+      uint8_t fr_quality;
+      
 
 	  
 
@@ -50,7 +54,7 @@ namespace GitESP32CAMCommLibrary
       
       void serverCaptureWithLigth();
       void serverCaptureWithFlashLight();
-      void serverCapture();
+      void serverCapture(uint8_t _quality = 10, framesize_t _size = FRAMESIZE_SVGA);
 	  
       void LightOn();
       void LightOff();

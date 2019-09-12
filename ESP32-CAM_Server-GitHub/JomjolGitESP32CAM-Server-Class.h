@@ -18,7 +18,7 @@ namespace GitESP32CAMServerLibrary
       void doLightOff();
       void doFlashOn();
       void doFlashOff();
-
+      
     public:
       ESP32CAMServerClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN) : GitESP32CAMCommLibrary::ESP32CAMCommClass(_pin, _num_led, _brightness, _CS, _flashPIN, this), GitServerLibrary::ServerClass() {} ;
 

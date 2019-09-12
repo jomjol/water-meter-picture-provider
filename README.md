@@ -5,7 +5,8 @@ Software for a water meter measurement to provide an JPG-Image of a watermeter w
 ##### 1.0.0 Initial Version for ESP8266 (with ArduCAM) and ESP32-CAM (with OV2640)
 ##### 2.0.0 Usage of internal ESP32-CAM Flash LED
 * Attention @ ESP32-CAM: compared to v1.0.0 the connection to the LED-strip has been changed from GPIO4 to GPIO2 
-
+##### 2.1.0 Parametrized Output (quality, size) (ESP32-CAM only)
+* Introduction of parameter for adjustable resolution and jpeg quality
 
 There are two code versions available:
 
@@ -28,6 +29,7 @@ An overview about the complete system can be seen here: [https://github.com/jomj
 ### Commands
 - http://IP-ADRESS/lighton   -   Switching the LED-lights on
 - http://IP-ADRESS/lightoff - Switching the LED-lights off
+- http://IP-ADRESS/capture - Returns a single image
 - http://IP-ADRESS/capture_with_light - Turn light on, send JPG, Turn light off
 
 Usefull for ESP32-CAM with onboard flash LED only:
@@ -36,6 +38,20 @@ Usefull for ESP32-CAM with onboard flash LED only:
 - http://IP-ADRESS/flashoff - Switching the onboard LED-flash off (GPIO4)
 - http://IP-ADRESS/capture_with_flashlight - Turn internal flash light on, send JPG, Turn flash light off
 - to be extended in future versions ...
+
+For ESP32-CAM the output picture size and quality can be adjusted by adding the following parameters:
+- http://IP-ADRESS/capture?quality=10&size=UXGA - Picture with high quality and resolution 1600x1200 pixel
+- http://IP-ADRESS/capture_with_flashlight?quality=10&size=UXGA - Picture with high quality and resolution 1600x1200 pixel
+
+Meaning of parametes:
+
+| Parameter | Meaning | Range/Value | Example |
+|:---------|:-------|:-----|:--------|
+| quality  | Quality setting for jpeg | 0 - 63 (0 = highest quality; 63 = lowest quality | quality=10 |
+| size | JPEG resolution of out put | QVGA (320x240), VGA (640x480), SVGA (800x600), XGA (1024x768), SXGA (1280x1024), UXGA (1600x1200) | size=SVGA |
+
+
+
 
 ### Compling Code
 The Arduino Code is in the subdirectory "ArduCAM_Server-NodeMCU-OTA_GitHub" for the NodeMCU version and "" for the ESP32-CAM version. In order to compile the ESP8266 for NodeMCU, the ESP32 developement environment for ESP32-CAM and the Neopixel Library (for both versions) needs to be installed through the Arduino Library Controll.
