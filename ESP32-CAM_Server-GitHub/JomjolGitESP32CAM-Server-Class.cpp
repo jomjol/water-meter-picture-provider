@@ -79,7 +79,11 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
   if (str_resolution == "UXGA")
     res = FRAMESIZE_UXGA;     // 1600x1200
 
-  quality = str_quality.toInt();
+  if (str_quality == "")
+    quality = 10;
+  else
+    quality = str_quality.toInt();
+    
   if (quality > 63)
     quality = 63;
   if (quality < 0)
