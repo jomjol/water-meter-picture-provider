@@ -1,31 +1,15 @@
 #include "JomjolGitESP32CAM-Server-Class.h"
 
-/*
-    FRAMESIZE_QQVGA,    // 160x120
-    FRAMESIZE_QQVGA2,   // 128x160
-    FRAMESIZE_QCIF,     // 176x144
-    FRAMESIZE_HQVGA,    // 240x176
-    FRAMESIZE_QVGA,     // 320x240
-    FRAMESIZE_CIF,      // 400x296
-    FRAMESIZE_VGA,      // 640x480
-    FRAMESIZE_SVGA,     // 800x600
-    FRAMESIZE_XGA,      // 1024x768
-    FRAMESIZE_SXGA,     // 1280x1024
-    FRAMESIZE_UXGA,     // 1600x1200
-    FRAMESIZE_QXGA,     // 2048*1536
-*/
 
-void GitESP32CAMServerLibrary::ESP32CAMServerClass::handleCommand(String _param, String _value, String _modus)
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::handleRoot() 
 {
-  if (_param.equals("humidity"))
-  {
-    if (_modus.equals("name"))
-      send(200, "text/plain", "tbd"); 
-    else
-      send(200, "text/plain", "tbd"); 
-    delay(0);
-    return;
-  }
+  String zw;
+  zw = "Hello from ESP32-CAM!\n";
+  zw = zw + "Flash-Light is on       GPIO" + String(flashPIN) + " - recommended illumination!\n";
+  zw = zw + "WS2812b-LED Strip is on GPIO" + String(NeoPixelPIN) + " - if connected\n";
+  zw = zw + "Watchdog enabled with 120s";
+  
+  send(200, "text/plain", zw);
 }
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithLigth()
@@ -39,21 +23,19 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithLigth()
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithFlashLight()
 {
-  
-  Serial.println("ArduCAM-Server-Class - doCaptureWithLigth");
+  Serial.println("ESP32CAM-Server-Class - doCaptureWithFlashLigth");
   FlashOn();
   Serial.println("sleep 5000");
   delay(5000);
   Serial.println("Start doCapture");
   this->doCapture();
   FlashOff();
-//  serverCaptureWithFlashLight();
 }
  
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
 {
-  Serial.println("ArduCAM-Server-Class - doCapture");
+  Serial.println("ESP32CAM-Server-Class - doCapture");
   String str_resolution = "";
   framesize_t res;
   String str_quality = "";
@@ -96,15 +78,13 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOn()
 {
   Serial.println("ArduCAM-Server-Class - Ligth On");
-//  LEDBandComm->LightOn();
   LightOn();
   send(200, "text/plain", "Light On");
 }
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOff()
 {
-  Serial.println("ArduCAM-Server-Class - Ligth Off");
-//  LEDBandComm->LightOff();
+  Serial.println("ESP32-CAM-Server-Class - Ligth Off");
   LightOff();
   send(200, "text/plain", "Light Off");
 }

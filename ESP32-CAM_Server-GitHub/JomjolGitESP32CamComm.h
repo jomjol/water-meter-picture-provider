@@ -26,29 +26,24 @@ namespace GitESP32CAMCommLibrary
   class ESP32CAMCommClass
   {
     private:
-
-
       WebServer *server;
-//      ArduCAM *myCAM;
-
 
       void serverCaptureMITHeader();
       void camCaptureMITHeader();
+      
       static size_t jpg_encode_stream(void * arg, size_t index, const void* data, size_t len);
-	  
 	  
       Adafruit_NeoPixel *light; 
       int brightness;
       void colorWipe(uint32_t c, uint8_t wait);
 
-      int flashPIN;
       framesize_t fr_size;
       uint8_t fr_quality;
-      
-
-	  
 
     public:
+      int flashPIN;
+      int NeoPixelPIN;
+
       ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN, WebServer *_server);
       virtual void setup();
       

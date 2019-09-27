@@ -10,7 +10,6 @@ namespace GitESP32CAMServerLibrary
   class ESP32CAMServerClass: public GitESP32CAMCommLibrary::ESP32CAMCommClass, public GitServerLibrary::ServerClass
   {
     private:
-      void handleCommand(String _param, String _value, String _modus);
       void doCaptureWithLigth();
       void doCaptureWithFlashLight();
       void doCapture();
@@ -18,6 +17,8 @@ namespace GitESP32CAMServerLibrary
       void doLightOff();
       void doFlashOn();
       void doFlashOff();
+      
+      void handleRoot(); 
       
     public:
       ESP32CAMServerClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN) : GitESP32CAMCommLibrary::ESP32CAMCommClass(_pin, _num_led, _brightness, _CS, _flashPIN, this), GitServerLibrary::ServerClass() {} ;

@@ -9,7 +9,7 @@ namespace GitServerLibrary
   {
     private:
       virtual void doCommand();
-	  virtual void doReset();
+	    virtual void doReset();
       virtual void handleCommand(String _param, String _value, String _modus);
 
       virtual void handleRoot();
