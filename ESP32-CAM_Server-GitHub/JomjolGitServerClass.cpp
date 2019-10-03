@@ -1,14 +1,35 @@
 #include "JomjolGitServerClass.h"
 
 
+/*
+GitServerLibrary::ServerClass::ServerClass(uint16_t _port)
+{
+  WebServer::WebServer(_port);
+  startzeit = millis();
+}
+*/
+
+
 void GitServerLibrary::ServerClass::setup()
 {
   on("/", std::bind(&ServerClass::handleRoot, this));
   on("/command.html", std::bind(&ServerClass::doCommand, this));
   on("/reset", std::bind(&ServerClass::doReset, this));
-  
+  on("/getruntime", std::bind(&ServerClass::doGetRuntime, this));
+    
   begin();
 }
+
+void GitServerLibrary::ServerClass::doGetRuntime() 
+{
+  unsigned long vergangene_zeit;
+  vergangene_zeit = millis() - startzeit;
+  vergangene_zeit = vergangene_zeit / 1000;
+  String zw = "Server running since " + String(vergangene_zeit) + "s";
+  
+  send(200, "text/plain", zw);
+}
+
 
 void GitServerLibrary::ServerClass::handleRoot() 
 {

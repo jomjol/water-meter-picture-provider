@@ -1,4 +1,8 @@
 ## Changelog
+##### 2.3.0 ESP32-CAM only
+* Improved Watchdog
+* Implementation of OTA update modus
+* Parametrized Delay (default = 2.5s)
 ##### 2.2.0 Implementation of Watchdog (ESP32-CAM only)
 * ESP32 Watchdog with 120s time implemented
 ##### 2.1.0 Parametrized Output (quality, size) (ESP32-CAM only)

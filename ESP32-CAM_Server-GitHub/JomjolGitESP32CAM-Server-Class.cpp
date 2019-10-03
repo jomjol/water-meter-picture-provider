@@ -14,21 +14,44 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::handleRoot()
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithLigth()
 {
+  String str_delay = "";
+  int int_delay;
+
+  str_delay = arg("delay");
+  Serial.print("delay:   "); Serial.println(str_delay);
+
+  if (str_delay == "")
+    int_delay = 2500;
+  else
+    int_delay = str_delay.toInt();
+  
   Serial.println("ArduCAM-Server-Class - doCaptureWithLigth");
   LightOn();
-  delay(5000);
+  Serial.print("sleep "); Serial.println(int_delay);
+  delay(int_delay);
   doCapture();
   LightOff();
 }
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithFlashLight()
 {
+  String str_delay = "";
+  int int_delay;
+
+  str_delay = arg("delay");
+  Serial.print("delay:   "); Serial.println(str_delay);
+
+  if (str_delay == "")
+    int_delay = 2500;
+  else
+    int_delay = str_delay.toInt();
+  
   Serial.println("ESP32CAM-Server-Class - doCaptureWithFlashLigth");
   FlashOn();
-  Serial.println("sleep 5000");
-  delay(5000);
+  Serial.print("sleep "); Serial.println(int_delay);
+  delay(int_delay);
   Serial.println("Start doCapture");
-  this->doCapture();
+  doCapture();
   FlashOff();
 }
  
@@ -72,6 +95,10 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
     quality = 0;
   
   serverCapture(quality, res);
+
+  //Reset Timer
+  timerWrite(timer, 0); //reset timer (feed watchdog)
+  lastWatchDogReset = millis();
 }
 
 
@@ -115,6 +142,32 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::setup()
   on("/lightoff", std::bind(&ESP32CAMServerClass::doLightOff, this));
   on("/flashon", std::bind(&ESP32CAMServerClass::doFlashOn, this));
   on("/flashoff", std::bind(&ESP32CAMServerClass::doFlashOff, this));
-  
+  on("/lastwatchdogreset", std::bind(&ESP32CAMServerClass::doGetLastWatchDogReset, this));
+    
   GitServerLibrary::ServerClass::setup();
+
+  // Watchdoch auf 1800s = 30 Minuten
+  timer = timerBegin(0, 80, true); //timer 0, div 80
+  timerAttachInterrupt(timer, &resetModule, true);
+  timerAlarmWrite(timer, 1800000000, false); //set time in us
+  timerAlarmEnable(timer); //enable interrupt  
+  Serial.println("Watchdog enabled with 30 Minute");
+
+}
+
+
+void IRAM_ATTR GitESP32CAMServerLibrary::ESP32CAMServerClass::resetModule(){
+    ets_printf("reboot\n");
+    ESP.restart();;
+}      
+
+
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::doGetLastWatchDogReset() 
+{
+  unsigned long vergangene_zeit;
+  vergangene_zeit = millis() - lastWatchDogReset;
+  vergangene_zeit = vergangene_zeit / 1000;
+  String zw = "Last WatchDog reset before " + String(vergangene_zeit) + "s";
+  
+  send(200, "text/plain", zw);
 }
