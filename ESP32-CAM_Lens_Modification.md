@@ -7,5 +7,5 @@ In order to use it for reading a meter, the focal-length of the OV2640 camera ha
 
 **ATTENTION:** This modification will render the camera unsuitable for general, web-cam type applications unless the focal length is changed back to the original setting.
 
-I removed the fixing glue of the OV2640 lens with a sharp knife [see Picture](./images/Lens_Fixing_Glue.jpg). After this I could screw the lens in and out. Rotating it by about a quarter of a turn counterclockwise results in a focus plane of about 10cm. You need to figure out your best setting with a little bit of trial and error for your specific environment.
+I removed the fixing glue of the OV2640 lens with a sharp knife ([see Picture](./images/Lens_Fixing_Glue.jpg)). After this I could screw the lens in and out. Rotating it by about a quarter of a turn counterclockwise results in a focus plane of about 10cm. You need to figure out your best setting with a little bit of trial and error for your specific environment.
 
