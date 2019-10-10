@@ -9,6 +9,9 @@ Software for a water meter measurement to provide an JPG-Image of a watermeter w
 
 #### [Full Change History](Changelog.md)
 
+#### ESP32-CAM - Hardware
+The ESP32-CAM camera requires [a simple modification to it's default focus setting](./ESP32-CAM_Lens_Modification.md) to make it suitable for use close to the meter face.
+
 #### ESP32-CAM - Software
 * [ESP32-CAM_Server-GitHub](ESP32-CAM_Server-GitHub)
 * Flashing onto the board is done using an FTDI-Flasher and the board is addressed as "ESP32-Wrover Module"
