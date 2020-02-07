@@ -17,7 +17,7 @@ Software for a water meter measurement to provide an JPG-Image of a watermeter w
 
 This is an HTTP-Webserver, sending an image of the OV2640 camera on request and additionally switching on illumination.
 The code is implemented in the Arduino IDE and is directly related to an selfmade water meter for house automation. 
-For the housing etc. see  [https://www.thingiverse.com/thing:3238162](https://www.thingiverse.com/thing:3238162)
+For the housing etc. see  [https://www.thingiverse.com/thing:3860911](https://www.thingiverse.com/thing:3860911)
 
 An overview about the complete system can be seen here: [https://github.com/jomjol/water-meter-measurement-system](https://github.com/jomjol/water-meter-measurement-system)
 
