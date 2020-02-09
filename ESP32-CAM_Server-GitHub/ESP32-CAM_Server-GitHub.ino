@@ -50,11 +50,22 @@ void WifiReConnect()
     WiFi.begin(ssid, password);
     Serial.println("");
 
-   // Wait for connection
+    // Wait for connection
+    // attempt to connect to Wifi network:
+    while ( WiFi.status() != WL_CONNECTED) {
+      Serial.print("Attempting to connect to WPA network, SSID: ");
+      Serial.println(ssid);
+      WiFi.begin(ssid, password);
+      // wait 10 seconds for connection:
+      delay(10000);
+    }   
+    
+/*    // Wait for connection
     while (WiFi.status() != WL_CONNECTED) {
       delay(500);
       Serial.print(".");
     }
+*/  
     Serial.println("");
     Serial.print("Connected to ");
     Serial.println(ssid);
