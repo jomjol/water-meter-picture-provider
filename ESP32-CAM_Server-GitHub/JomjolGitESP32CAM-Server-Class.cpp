@@ -5,10 +5,12 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::handleRoot()
 {
   String zw;
   zw = "Hello from ESP32-CAM!\n";
+  zw = zw + "Version:                2.3.1\n";
   zw = zw + "Flash-Light is on       GPIO" + String(flashPIN) + " - recommended illumination!\n";
   zw = zw + "WS2812b-LED Strip is on GPIO" + String(NeoPixelPIN) + " - if connected\n";
   zw = zw + "Watchdog enabled with 120s";
-  
+
+    
   send(200, "text/plain", zw);
 }
 
