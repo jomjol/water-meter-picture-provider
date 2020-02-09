@@ -2,6 +2,8 @@
 Software for a water meter measurement to provide an JPG-Image of a watermeter with an OV2640 camera with internal flash LED or WS2812-LED illumination
 
 ## Changelog
+##### 2.3.1 WifiReconnect
+* Update WifiReconnect (based on input from watchkerb from iobroker forum)
 ##### 2.3.0 ESP32-CAM only
 * Improved Watchdog
 * Implementation of OTA update modus
