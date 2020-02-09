@@ -1,5 +1,5 @@
 #include "JomjolGitServerClass.h"
-#include "JomjolGitESP32CamComm.h"
+#include "JomjolGitESP32CAMComm.h"
 
 #ifndef _ESP32CAM_Server_Library
 #define _ESP32CAM_Server_Library
