@@ -12,7 +12,9 @@
 
 const char* ssid =     "SSID";
 const char* password = "PASSWORD";
+const char* updatepassword = "UPDATE";
 const char* host = "wasseruhr";
+// FIX IP siehe unten
 
 #define LEDPin      2          // Pin für Steuerung LED-Leiste 
 #define INT_LED     33         // Interne LED zum Blinken bei WiFi-Connect at pin GPIO33 (ESP32-CAM).
@@ -52,12 +54,23 @@ void WifiReConnect()
 
    // Wait for connection
     while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
+      Serial.print("Attempting to connect to WPA network, SSID: ");
+      Serial.println(ssid);
+      WiFi.begin(ssid, password);
+  
+      // wait 5 seconds for connection:
+      delay(5000);
     }
     Serial.println("");
     Serial.print("Connected to ");
     Serial.println(ssid);
+    
+//    FIX IP?
+//    IPAddress ip(192,168,1,50);   
+//    IPAddress gateway(192,168,1,100);   
+//    IPAddress subnet(255,255,255,0);   
+//    WiFi.config(ip, gateway, subnet);
+    
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
 
@@ -104,7 +117,7 @@ void OTA_setup()
       else if (error == OTA_END_ERROR) Serial.println("End Failed");
     });
     
-  ArduinoOTA.setPassword(password);
+  ArduinoOTA.setPassword(updatepassword);
   ArduinoOTA.begin();}
 
 void OTA_loop()
