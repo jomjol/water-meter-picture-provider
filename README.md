@@ -1,7 +1,12 @@
 # water-meter-house-automation
-Software for a water meter measurement to provide an JPG-Image of a watermeter with an OV2640 camera with internal flash LED or WS2812-LED illumination
+Software for a water meter measurement to provide an JPG-Image of a watermeter with an OV2640 camera with internal flash LED
 
 ## Changelog
+##### 2.4.0 Wifi-Handling
+* Implementation of Reconnect during loop (if WiFi gets lost)
+* Change of Blinking behaviour: 3x short if no WiFi connections (every 10s) and one time 3x1s after connection to WiFi
+##### 2.3.1 WifiReconnect
+* Update WifiReconnect (based on input from watchkerb from iobroker forum)
 ##### 2.3.0 ESP32-CAM only
 * Improved Watchdog
 * Implementation of OTA update modus
