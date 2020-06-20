@@ -3,6 +3,7 @@
 
 #include <WebServer.h>
 #include "esp_camera.h"
+#include "esp32-hal-ledc.h"
 
 // Select camera model
 //#define CAMERA_MODEL_WROVER_KIT
@@ -30,33 +31,37 @@ namespace GitESP32CAMCommLibrary
 
       void serverCaptureMITHeader();
       void camCaptureMITHeader();
-      
+
       static size_t jpg_encode_stream(void * arg, size_t index, const void* data, size_t len);
-	  
-      Adafruit_NeoPixel *light; 
+
+      Adafruit_NeoPixel *light;
       int brightness;
       void colorWipe(uint32_t c, uint8_t wait);
 
       framesize_t fr_size;
       uint8_t fr_quality;
 
+      int flashChannel;
+      int flashFreq;
+      int flashResolution;
+
     public:
       int flashPIN;
       int NeoPixelPIN;
 
-      ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN, WebServer *_server);
+      ESP32CAMCommClass(int _pin, int _num_led, int _brightness, int _CS, int _flashPIN, int _flashChannel, int _flashFreq, int _flashResolution, WebServer *_server);
       virtual void setup();
-      
+
       void serverCaptureWithLigth();
       void serverCaptureWithFlashLight();
       void serverCapture(uint8_t _quality = 10, framesize_t _size = FRAMESIZE_SVGA);
-	  
+
       void LightOn();
       void LightOff();
 
-      void FlashOn();
+      void FlashOn(int intensity);
       void FlashOff();
-      
+
   };
 }
 #endif
