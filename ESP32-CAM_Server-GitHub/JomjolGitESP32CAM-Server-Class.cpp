@@ -26,8 +26,8 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithLigth()
     int_delay = 2500;
   else
     int_delay = str_delay.toInt();
-  
-  Serial.println("ArduCAM-Server-Class - doCaptureWithLigth");
+
+  Serial.println("ArduCAM-Server-Class - doCaptureWithLight");
   LightOn();
   Serial.print("sleep "); Serial.println(int_delay);
   delay(int_delay);
@@ -47,9 +47,21 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCaptureWithFlashLight()
     int_delay = 2500;
   else
     int_delay = str_delay.toInt();
-  
-  Serial.println("ESP32CAM-Server-Class - doCaptureWithFlashLigth");
-  FlashOn();
+
+  String str_intensity = "";
+  int int_intensity;
+
+  str_intensity = arg("intensity");
+  Serial.print("intensity:   ");
+  Serial.println(str_intensity);
+
+  if (str_intensity == "")
+    str_intensity = 1;
+  else
+    int_intensity = str_intensity.toInt();
+
+  Serial.println("ESP32CAM-Server-Class - doCaptureWithFlashLight");
+  FlashOn(int_intensity);
   Serial.print("sleep "); Serial.println(int_delay);
   delay(int_delay);
   Serial.println("Start doCapture");
@@ -106,14 +118,14 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doCapture()
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOn()
 {
-  Serial.println("ArduCAM-Server-Class - Ligth On");
+  Serial.println("ArduCAM-Server-Class - Light On");
   LightOn();
   send(200, "text/plain", "Light On");
 }
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOff()
 {
-  Serial.println("ESP32-CAM-Server-Class - Ligth Off");
+  Serial.println("ESP32-CAM-Server-Class - Light Off");
   LightOff();
   send(200, "text/plain", "Light Off");
 }
@@ -121,7 +133,20 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doLightOff()
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::doFlashOn()
 {
   Serial.println("GPIO4-High");
-  FlashOn();
+
+  String str_intensity = "";
+  int int_intensity;
+
+  str_intensity = arg("intensity");
+  Serial.print("intensity:   ");
+  Serial.println(str_intensity);
+
+  if (str_intensity == "")
+    str_intensity = 1;
+  else
+    int_intensity = str_intensity.toInt();
+
+  FlashOn(int_intensity);
   send(200, "text/plain", "Light On");
 }
 

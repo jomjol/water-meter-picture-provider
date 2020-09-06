@@ -14,20 +14,22 @@ const char* ssid =     "SSID";
 const char* password = "PASSWORD";
 const char* host = "wasseruhr";
 
-#define LEDPin      2          // Pin für Steuerung LED-Leiste 
-#define INT_LED     33         // Interne LED zum Blinken bei WiFi-Connect at pin GPIO33 (ESP32-CAM).
-#define FLASH_PIN   4          // Intere Flash-LED des ESP32-CAM Moduls
+#define LEDPin             2    // Pin für Steuerung LED-Leiste
+#define INT_LED           33    // Interne LED zum Blinken bei WiFi-Connect at pin GPIO33 (ESP32-CAM).
+#define FLASH_PIN          4    // Interne Flash-LED des ESP32-CAM Moduls
+#define FLASH_CHANNEL      2    // Interne Flash-LED Channel für LEDC
+#define FLASH_FREQ      5000    // Interne Flash-LED Frequenz für LEDC
+#define FLASH_RESOLUTION  12    // Interne Flash-LED Resolution (Bits) für LEDC
 
-
-GitESP32CAMServerLibrary::ESP32CAMServerClass ESP32CAMServer(LEDPin, 10, 50, 16, FLASH_PIN); // Pin, Anzahl LEDs, Brightness, CS, GPIO_FLASH
+GitESP32CAMServerLibrary::ESP32CAMServerClass ESP32CAMServer(LEDPin, 10, 50, 16, FLASH_PIN, FLASH_CHANNEL, FLASH_FREQ, FLASH_RESOLUTION); // Pin, Anzahl LEDs, Brightness, CS, GPIO_FLASH, LEDC channel, frequency, resolution
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Setup start");
-  
+
   WifiInit();
   OTA_setup();
-  
+
   ESP32CAMServer.setup();
   Serial.println("Setup done");
 }
@@ -44,14 +46,13 @@ void WifiReConnect()
 {
   if (WiFi.status() != WL_CONNECTED)
   {
-      
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     Serial.println("");
 
     // Wait for connection
     // attempt to connect to Wifi network:
-    while ( WiFi.status() != WL_CONNECTED) 
+    while ( WiFi.status() != WL_CONNECTED)
     {
       for (int i=0;i<3;i++)
         {
@@ -66,8 +67,8 @@ void WifiReConnect()
       WiFi.begin(ssid, password);
       // wait 10 seconds for connection:
       delay(10000);
-    }   
-   for (int i=0;i<3;i++)
+    }
+    for (int i=0;i<3;i++)
     {
       digitalWrite(INT_LED, LOW);          // turn the LED on.
       delay(500);         // wait
@@ -76,7 +77,7 @@ void WifiReConnect()
       delay(0);                        //to prevent watchdog firing.
     }
   }
-  
+
 }
 
 
@@ -126,7 +127,7 @@ void OTA_setup()
       else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
       else if (error == OTA_END_ERROR) Serial.println("End Failed");
     });
-    
+
   ArduinoOTA.setPassword(password);
   ArduinoOTA.begin();}
 
