@@ -17,6 +17,7 @@ namespace GitESP32CAMServerLibrary
       void doLightOff();
       void doFlashOn();
       void doFlashOff();
+      void doVersion();
       
       void doGetLastWatchDogReset();
             
