@@ -132,6 +132,11 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::doFlashOff()
   send(200, "text/plain", "Light On");
 }
 
+void GitESP32CAMServerLibrary::ESP32CAMServerClass::doVersion()
+{
+  Serial.println("Version");
+  send(200, "text/plain", "Version:" __DATE__ " " __TIME__);
+}
 
 void GitESP32CAMServerLibrary::ESP32CAMServerClass::setup()
 {
@@ -145,6 +150,7 @@ void GitESP32CAMServerLibrary::ESP32CAMServerClass::setup()
   on("/flashon", std::bind(&ESP32CAMServerClass::doFlashOn, this));
   on("/flashoff", std::bind(&ESP32CAMServerClass::doFlashOff, this));
   on("/lastwatchdogreset", std::bind(&ESP32CAMServerClass::doGetLastWatchDogReset, this));
+  on("/version", std::bind(&ESP32CAMServerClass::doVersion, this));
     
   GitServerLibrary::ServerClass::setup();
 
