@@ -1,3 +1,5 @@
+<span style="color: red;">This code is depreciated and will not be maintained any more!</span> 
+
 # water-meter-house-automation
 Software for a water meter measurement to provide an JPG-Image of a watermeter with an OV2640 camera with internal flash LED
 
